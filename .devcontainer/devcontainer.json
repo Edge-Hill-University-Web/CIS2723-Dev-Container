@@ -9,10 +9,12 @@
   "otherPortsAttributes": {
     "onAutoForward": "openBrowser"
   },
- 
   "customizations": {
     "vscode": {
       "settings": {
+        "extensions.autoUpdate": false,
+        "extensions.autoCheckUpdates": false,
+        "extensions.ignoreRecommendations": true,
         "terminal.integrated.profiles.linux": {
           "bash": {
             "path": "/usr/bin/bash",
@@ -21,9 +23,8 @@
         },
         "terminal.integrated.defaultProfile.linux": "bash"
       },
-      
       "extensions": [
-        "xdebug.php-debug",
+        "donjayamanne.python-extension-pack",
         "ms-python.debugpy",
         "ms-python.python",
         "tiansin.php-debug",
@@ -32,12 +33,18 @@
       ]
     }
   },
-  "onCreateCommand": "apt update &&  apt-get install bash -y &&  apt install -y software-properties-common apt-transport-https ca-certificates lsb-release libarchive-tools curl gnupg &&  add-apt-repository ppa:ondrej/php -y &&  apt update --fix-missing  &&  apt install -y php8.3 &&  apt install -y php-xdebug php8.3-mysql php8.3-mbstring php8.3-tokenizer php8.3-xml php8.3-xmlwriter && php -r \"copy('https://getcomposer.org/installer', 'composer-setup.php');\" && php composer-setup.php  --install-dir=/usr/local/bin --filename=composer && rm composer-setup.php && wget -O phpunit.phar https://phar.phpunit.de/phpunit-10.phar && chmod +x phpunit.phar &&  mv phpunit.phar /usr/local/bin/phpunit && echo \"alias phpunit='/usr/local/bin/phpunit'\" >> ~/.bashrc &&  mkdir -p /etc/apt/keyrings && curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key |  gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg && echo \"deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_16.x nodistro main\" |  tee /etc/apt/sources.list.d/nodesource.list &&  apt-get update &&  apt-get install nodejs -y &&  apt-get install gcc g++ make && curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor |  tee /usr/share/keyrings/yarnkey.gpg >/dev/null echo \"deb [signed-by=/usr/share/keyrings/yarnkey.gpg] https://dl.yarnpkg.com/debian stable main\" |  tee /etc/apt/sources.list.d/yarn.list &&  apt-get update &&  apt-get install yarn -y && npm install --global mocha && echo \"alias mocha='/lib/node_modules/mocha/bin/mocha.js'\" >> ~/.bashrc && update-alternatives --install /usr/bin/python python /usr/bin/python3 1 && apt install -y python3-pip",
+  "containerEnv": {
+    "VSCODE_MARKETPLACE": "http://localhost"
+  },
+  
+  "onCreateCommand": "apt update &&  apt-get install bash -y &&  apt install -y software-properties-common apt-transport-https ca-certificates lsb-release libarchive-tools curl gnupg &&  add-apt-repository ppa:ondrej/php -y &&  apt update --fix-missing  &&  apt install -y php8.3 &&  apt install -y php-xdebug php8.3-mysql php8.3-mbstring php8.3-tokenizer php8.3-xml php8.3-xmlwriter && php -r \"copy('https://getcomposer.org/installer', 'composer-setup.php');\" && php composer-setup.php  --install-dir=/usr/local/bin --filename=composer && rm composer-setup.php && wget -O phpunit.phar https://phar.phpunit.de/phpunit-10.phar && chmod +x phpunit.phar &&  mv phpunit.phar /usr/local/bin/phpunit && echo \"alias phpunit='/usr/local/bin/phpunit'\" >> ~/.bashrc &&  mkdir -p /etc/apt/keyrings && curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key |  gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg && echo \"deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_16.x nodistro main\" |  tee /etc/apt/sources.list.d/nodesource.list &&  apt-get update &&  apt-get install nodejs -y &&  apt-get install gcc g++ make && curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor |  tee /usr/share/keyrings/yarnkey.gpg >/dev/null echo \"deb [signed-by=/usr/share/keyrings/yarnkey.gpg] https://dl.yarnpkg.com/debian stable main\" |  tee /etc/apt/sources.list.d/yarn.list &&  apt-get update &&  apt-get install yarn -y && npm install --global mocha && echo \"alias mocha='/lib/node_modules/mocha/bin/mocha.js'\" >> ~/.bashrc && update-alternatives --install /usr/bin/python python /usr/bin/python3 1 && ** apt install -y python3-pip && pip install -r requrements.txt && [ -d ~/.vscode-server/extensions ] && chmod -R a-w ~/.vscode-server/extensions",
+ 
   "postCreateCommand": "sh prepare.sh",
   "runArgs": [
     "--name",
-    "CIS2723-2024-Development-Environment",
-    "--network", "host"
+    "CIS2723-2025-Development-Environment",
+    "--network",
+    "host"
   ],
   "remoteUser": "root"
 }
